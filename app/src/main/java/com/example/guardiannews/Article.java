@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 public class Article {
 
     @JsonProperty("id")
@@ -20,9 +18,6 @@ public class Article {
     @JsonProperty("webTitle")
     private String webTitle;
 
-    @JsonProperty("fields")
-    private List imageUrl;
-
     private Bitmap image;
 
     @JsonProperty("pillarName")
@@ -32,12 +27,20 @@ public class Article {
 
     }
 
-    public Article(String id, String type, String sectionId, String webTitle, List imageUrl, String pillarName) {
+    public Article(String id, String type, String sectionId, String webTitle, String pillarName) {
         this.id = id;
         this.type = type;
         this.sectionId = sectionId;
         this.webTitle = webTitle;
-        this.imageUrl = imageUrl;
+        this.pillarName = pillarName;
+    }
+
+    public Article(String id, String type, String sectionId, String webTitle, Bitmap image, String pillarName) {
+        this.id = id;
+        this.type = type;
+        this.sectionId = sectionId;
+        this.webTitle = webTitle;
+        this.image = image;
         this.pillarName = pillarName;
     }
 
@@ -73,14 +76,6 @@ public class Article {
         this.webTitle = webTitle;
     }
 
-    public List getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(List imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public Bitmap getImage() {
         return image;
     }
@@ -104,7 +99,7 @@ public class Article {
                 ", type='" + type + '\'' +
                 ", sectionId='" + sectionId + '\'' +
                 ", webTitle='" + webTitle + '\'' +
-                ", imageUrl=" + imageUrl +
+                ", image=" + image +
                 ", pillarName='" + pillarName + '\'' +
                 '}';
     }
