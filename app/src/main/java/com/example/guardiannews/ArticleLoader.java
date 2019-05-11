@@ -12,9 +12,6 @@ import java.util.List;
  */
 public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
 
-    /** Guardian API Key **/
-    final String GUARDIAN_NEWS_URL = "?api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
-
     /** Tag for log messages */
     private static final String LOG_TAG = ArticleLoader.class.getName();
 
@@ -39,7 +36,11 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
     @Nullable
     @Override
     public List<Article> loadInBackground() {
-        List<Article> articles = QueryUtils.getArticles(GUARDIAN_NEWS_URL);
+
+        if(mUrl == null) {
+            return null;
+        }
+        List<Article> articles = QueryUtils.getArticles(mUrl);
         return articles;
     }
 
