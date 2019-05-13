@@ -30,15 +30,13 @@ public final class QueryUtils {
     private static final String startUrl = "https://content.guardianapis.com/search";
 
     /**
-     * parses json and returns the Articles
+     * parses json and returns list of 'Articles'
      * @param inputUrl: url of json response
      */
     public static List<Article> getArticles(String inputUrl) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-
-        List<Article> articles = new ArrayList<Article>();
 
         //used to associate Article with 'thumbnail' string to convert the string to a bitmap before setting Article field
         Map<Article,String> imageAssocation = new HashMap<>();
@@ -56,14 +54,17 @@ public final class QueryUtils {
             while(iterator.hasNext()) {
                 JsonNode node = iterator.next();
                 JsonNode fieldNode = node.path("fields");
-                String thumbnail = fieldNode.get("thumbnail").toString();
-                Article article = mapper.treeToValue(node, Article.class);
-                imageAssocation.put(article,thumbnail);
+                if (fieldNode.get("thumbnail") != null) {
+                    String thumbnail = fieldNode.get("thumbnail").toString();
+                    Article article = mapper.treeToValue(node, Article.class);
+                    imageAssocation.put(article, thumbnail);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        List<Article> articles = mapImagesToBitmap(imageAssocation);
         return articles;
     }
 
@@ -72,7 +73,7 @@ public final class QueryUtils {
      * @param urlString: String of url
      * @return URL object
      */
-    private URL createUrlObject(String urlString) {
+    private static URL createUrlObject(String urlString) {
         URL url;
         try {
             url = new URL(urlString);
@@ -88,7 +89,7 @@ public final class QueryUtils {
      * @param url String of 'url' of image
      * @return Bitmap object of image
      */
-    private Bitmap toBitmap(String url) {
+    private static Bitmap toBitmap(String url) {
         if (url == null) {
             return null;
         }
@@ -107,7 +108,7 @@ public final class QueryUtils {
      * list {of Articles} with the Bitmap image
      * @return
      */
-    private List<Article> mapImagesToBitmap(Map<Article,String> articleMap) {
+    private static List<Article> mapImagesToBitmap(Map<Article,String> articleMap) {
         List<Article> bitmapArticles = new ArrayList<>();
         for (Map.Entry<Article,String> entry : articleMap.entrySet()) {
             Article article = entry.getKey();
