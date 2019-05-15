@@ -53,9 +53,4 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         return articleListItem;
     }
-
-
-
-
-
 }

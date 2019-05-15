@@ -10,6 +10,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,14 +38,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        articleAdapter = new ArticleAdapter(this, new ArrayList<Article>());
+        if(checkConnection(this) == true) {
+            ListView articleListView = (ListView) findViewById(R.id.frontpage);
+            articleAdapter = new ArticleAdapter(this, new ArrayList<Article>());
+            articleListView.setAdapter(articleAdapter);
+            getSupportLoaderManager().initLoader(1, null, this).forceLoad();
+        }
 
-
+        else {
+            emptyTextView = (TextView) findViewById(R.id.connectionCheck);
+            emptyTextView.setText(R.string.no_connection);
+        }
     }
 
     @NonNull
     @Override
     public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle bundle) {
+        Log.d("check LOADER: ","LOADER CREATED" );
         return new ArticleLoader(this, GUARDIAN_NEWS_URL);
     }
 

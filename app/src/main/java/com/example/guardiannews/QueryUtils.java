@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public final class QueryUtils {
         URL link = createUrlObject(url);
         try {
             assert link != null;
-            return BitmapFactory.decodeStream(link.openConnection().getInputStream());
+            return BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -113,7 +114,9 @@ public final class QueryUtils {
         for (Map.Entry<Article,String> entry : articleMap.entrySet()) {
             Article article = entry.getKey();
             Bitmap bitmap = toBitmap(entry.getValue());
-            Log.d("BITMAP COUNT IS: ", Integer.toString(bitmap.getByteCount()));
+            if (bitmap == null) {
+                Log.v(article.getWebTitle(), "BITMAP IS NULL FOR THIS ARTICLE");
+            }
             article.setImage(bitmap);
             bitmapArticles.add(article);
         }

@@ -36,7 +36,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
     @Nullable
     @Override
     public List<Article> loadInBackground() {
-
+        Log.i(LOG_TAG, "TEST: loadInBackground called");
         if(mUrl == null) {
             return null;
         }
