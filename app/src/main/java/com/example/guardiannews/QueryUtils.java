@@ -35,6 +35,7 @@ public final class QueryUtils {
      * @param inputUrl: url of json response
      */
     public static List<Article> getArticles(String inputUrl) {
+
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
@@ -77,7 +78,8 @@ public final class QueryUtils {
     private static URL createUrlObject(String urlString) {
         URL url;
         try {
-            url = new URL(urlString);
+            String newUrlString = urlString.replace("\"", "");
+            url = new URL(newUrlString);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
@@ -87,21 +89,28 @@ public final class QueryUtils {
 
     /**
      * Converts url 'String' to 'Bitmap' format
-     * @param url String of 'url' of image
+     * @param urlString: url of image in 'String' form
      * @return Bitmap object of image
      */
-    private static Bitmap toBitmap(String url) {
-        if (url == null) {
+    private static Bitmap toBitmap(String urlString) {
+        if (urlString == null) {
             return null;
         }
-        URL link = createUrlObject(url);
+
+        URL url = null;
+        urlString = urlString.replace("\"", "");
+        Bitmap image = null;
+
         try {
-            assert link != null;
-            return BitmapFactory.decodeStream((InputStream) new URL(url).getContent());
+            url = new URL(urlString);
+            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return image;
     }
 
     /**
@@ -109,6 +118,7 @@ public final class QueryUtils {
      * list {of Articles} with the Bitmap image
      * @return
      */
+
     private static List<Article> mapImagesToBitmap(Map<Article,String> articleMap) {
         List<Article> bitmapArticles = new ArrayList<>();
         for (Map.Entry<Article,String> entry : articleMap.entrySet()) {
