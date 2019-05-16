@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /** displays message if article list is empty **/
     private TextView emptyTextView;
 
+    /** displays message if connection works **/
+    private TextView connectionTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         else {
-            emptyTextView = (TextView) findViewById(R.id.connectionCheck);
-            emptyTextView.setText(R.string.no_connection);
+            connectionTextView = (TextView) findViewById(R.id.connectionCheck);
+            connectionTextView.setText(R.string.no_connection);
         }
     }
 
@@ -66,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         if (articleAdapter.getCount() == 0) {
-            emptyTextView.setText(R.string.no_earthquakes_found);
+            emptyTextView = findViewById(R.id.articles_found);
+            emptyTextView.setText(R.string.no_articles_found);
         }
     }
 
