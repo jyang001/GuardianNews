@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="2dp">
 
     <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/card_view"
         android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="4dp"
+        android:layout_margin="1dp"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_weight="0.5"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        android:clickable="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/article_thumbnail"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:contentDescription="desc"
-                android:scaleType="centerCrop"/>
-
-            <TextView
-                android:id="@+id/article_title"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Title"/>
+                android:background="#89969F">
 
-            <TextView
-                android:id="@+id/article_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="No Type"/>
+                <ImageView
+                    android:id="@+id/article_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="desc"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="bottom"
+                    android:layout_centerInParent="true"/>
 
-            <TextView
-                android:id="@+id/article_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/article_title"
-                android:layout_alignBottom="@+id/article_title"
-                android:layout_alignParentRight="true"
-                android:text="category"
-                android:padding="4dp"
-                android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/article_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Title"/>
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/article_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_below="@id/article_thumbnail"
+                        android:text="No Type"/>
+
+                    <TextView
+                        android:id="@+id/article_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/article_title"
+                        android:layout_alignBottom="@+id/article_title"
+                        android:layout_alignParentRight="true"
+                        android:padding="4dp"
+                        android:text="category"
+                        android:textSize="16sp" />
+
+            </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
 
 
-</LinearLayout>
+</FrameLayout>
