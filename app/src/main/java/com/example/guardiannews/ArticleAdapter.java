@@ -1,6 +1,7 @@
 package com.example.guardiannews;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,38 @@ import java.util.List;
  * An Array Adapter to display a list of articles in the UI
  */
 public class ArticleAdapter extends ArrayAdapter<Article> {
+
+    private class ArticleViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView articleThumbnail;
+        TextView articleTitle;
+        TextView articleType;
+        TextView articleCategory;
+
+        /** ViewHolder Constructor
+         *Gets reference for textViews
+         *@param itemView: View inflated from onCreateViewHolder()
+         */
+        public ArticleViewHolder(View itemView) {
+            super(itemView);
+            articleThumbnail = (ImageView) itemView.findViewById(R.id.article_thumbnail);
+            articleTitle = (TextView) itemView.findViewById(R.id.article_title);
+            articleType = (TextView) itemView.findViewById(R.id.article_type);
+            articleCategory = (TextView) itemView.findViewById(R.id.article_category);
+        }
+
+        /**
+         * method to bind new attributes to View that is recycled
+         */
+        void bind(ImageView newImage, TextView newTitle, TextView newArticleType, TextView newArticleCategory) {
+            articleThumbnail = newImage;
+            articleTitle = newTitle;
+            articleType = newArticleType;
+            articleCategory = newArticleCategory;
+        }
+    }
+
+
 
     /**
      * Constructor
@@ -53,4 +86,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         return articleListItem;
     }
+
+
+
 }
