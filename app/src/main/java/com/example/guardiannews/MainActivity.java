@@ -9,8 +9,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,10 +43,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
         if(checkConnection(this) == true) {
-            ListView articleListView = (ListView) findViewById(R.id.frontpage);
+            RecyclerView articleListView = (RecyclerView) findViewById(R.id.frontpage);
+            articleListView.setLayoutManager(new LinearLayoutManager(this)); //layout manager
             articleAdapter = new ArticleAdapter(this, new ArrayList<Article>());
             articleListView.setAdapter(articleAdapter);
             getSupportLoaderManager().initLoader(1, null, this).forceLoad();
+            Log.d("CHECK CONNECTION: ","LOAD 1" );
+
         }
 
         else {
@@ -66,9 +70,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         articleAdapter.clear();
         if(articles != null && !articles.isEmpty()) {
             articleAdapter.addAll(articles);
+            emptyTextView = findViewById(R.id.articles_found);
+            String x = Integer.toString(articleAdapter.getItemCount());
+            //emptyTextView.setText(x);
+            Log.d("CHECK CONNECTION: ","LOAD 2" );
+            Log.d("ARTICLE SIZE: ",x );
+
+
         }
 
-        if (articleAdapter.getCount() == 0) {
+        if (articleAdapter.getItemCount() == 0) {
             emptyTextView = findViewById(R.id.articles_found);
             emptyTextView.setText(R.string.no_articles_found);
         }
