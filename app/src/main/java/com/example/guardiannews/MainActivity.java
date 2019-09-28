@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,18 +20,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>> {
 
-    private static final int LOADER_ID = 1;
-
     /** Guardian API Key **/
     private final String GUARDIAN_NEWS_URL = "?api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
 
-    private ArticleAdapter articleAdapter;
+    private ArticleRecyclerAdapter articleRecyclerAdapter;
 
     /** displays message if article list is empty **/
     private TextView emptyTextView;
 
     /** displays message if connection works **/
     private TextView connectionTextView;
+
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +44,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
         if(checkConnection(this) == true) {
-            RecyclerView articleListView = (RecyclerView) findViewById(R.id.frontpage);
-            articleListView.setLayoutManager(new LinearLayoutManager(this)); //layout manager
-            articleAdapter = new ArticleAdapter(this, new ArrayList<Article>());
-            articleListView.setAdapter(articleAdapter);
+            mRecyclerView = findViewById(R.id.recyclerView);
+            initRecylerView();
             getSupportLoaderManager().initLoader(1, null, this).forceLoad();
-            Log.d("CHECK CONNECTION: ","LOAD 1" );
-
         }
 
         else {
@@ -67,22 +64,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Article>> loader, List<Article> articles) {
-        articleAdapter.clear();
         if(articles != null && !articles.isEmpty()) {
-            articleAdapter.addAll(articles);
-            emptyTextView = findViewById(R.id.articles_found);
-            String x = Integer.toString(articleAdapter.getItemCount());
-            //emptyTextView.setText(x);
-            Log.d("CHECK CONNECTION: ","LOAD 2" );
-            Log.d("ARTICLE SIZE: ",x );
-
-
+            articleRecyclerAdapter.refreshLayout(articles);
+            articleRecyclerAdapter.notifyDataSetChanged();
         }
-
-        if (articleAdapter.getItemCount() == 0) {
+        else if (articleRecyclerAdapter.getItemCount() == 0) {
             emptyTextView = findViewById(R.id.articles_found);
             emptyTextView.setText(R.string.no_articles_found);
         }
+
     }
 
     /**
@@ -91,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     @Override
     public void onLoaderReset(@NonNull Loader<List<Article>> loader) {
-        articleAdapter.clear();
+        loader.reset();
     }
 
     /**
@@ -103,6 +93,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void initRecylerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        articleRecyclerAdapter = new ArticleRecyclerAdapter(new ArrayList<Article>());
+        mRecyclerView.setAdapter(articleRecyclerAdapter);
     }
 
 }
