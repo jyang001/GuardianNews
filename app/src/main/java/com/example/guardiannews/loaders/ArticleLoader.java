@@ -1,9 +1,12 @@
-package com.example.guardiannews;
+package com.example.guardiannews.loaders;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+
+import com.example.guardiannews.models.Article;
+import com.example.guardiannews.util.QueryUtils;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
      * @param context
      * @param url: url to retrieve data from
      */
-    ArticleLoader(Context context, String url) {
+    public ArticleLoader(Context context, String url) {
         super(context);
         mUrl=url;
     }

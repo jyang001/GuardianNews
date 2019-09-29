@@ -1,14 +1,15 @@
-package com.example.guardiannews;
+package com.example.guardiannews.adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.guardiannews.R;
+import com.example.guardiannews.models.Article;
 
 import java.util.ArrayList;
 import java.util.List;

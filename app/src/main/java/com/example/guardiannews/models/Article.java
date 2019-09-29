@@ -1,4 +1,4 @@
-package com.example.guardiannews;
+package com.example.guardiannews.models;
 
 import android.graphics.Bitmap;
 
