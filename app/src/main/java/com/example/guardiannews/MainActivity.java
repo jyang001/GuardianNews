@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -41,10 +42,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("ONCREATE: ","STARTING APP" );
-
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         if(checkConnection(this) == true) {
             mRecyclerView = findViewById(R.id.recyclerView);
@@ -56,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             connectionTextView = (TextView) findViewById(R.id.connectionCheck);
             connectionTextView.setText(R.string.no_connection);
         }
+
+        setSupportActionBar((Toolbar) findViewById(R.id.articles_toolbar));
+        setTitle("Guardian News");
     }
 
     @NonNull
