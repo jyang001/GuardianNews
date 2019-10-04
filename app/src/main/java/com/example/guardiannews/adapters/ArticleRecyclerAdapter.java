@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An Array Adapter to display a list of articles in the UI
+ * An Recylcer Adapter to display a list of articles in the UI
  */
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ArticleViewHolder> {
 
@@ -40,9 +40,9 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     public void onBindViewHolder(@NonNull ArticleViewHolder articleViewHolder, int i) {
         Article currentArticle = mArticles.get(i);
         articleViewHolder.thumbnail.setImageBitmap(currentArticle.getImage());
-        articleViewHolder.title.setText(currentArticle.getWebTitle());
-        articleViewHolder.type.setText(currentArticle.getType());
-        articleViewHolder.category.setText(currentArticle.getPillarName());
+        articleViewHolder.title.setText(currentArticle.getArticleTitle());
+        articleViewHolder.type.setText(currentArticle.getArticleType());
+        articleViewHolder.section.setText(currentArticle.getSectionName());
     }
 
     @Override
@@ -58,18 +58,18 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         mArticles = newArticles;
     }
 
-
     public class ArticleViewHolder extends RecyclerView.ViewHolder {
 
         ImageView thumbnail;
-        TextView title, type, category;
+        TextView title, type, section;
 
         public ArticleViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.article_thumbnail);
             title = itemView.findViewById(R.id.article_title);
             type = itemView.findViewById(R.id.article_type);
-            category = itemView.findViewById(R.id.article_category);
+            section = itemView.findViewById(R.id.article_section);
+
         }
     }
 

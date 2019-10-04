@@ -28,11 +28,15 @@ public final class QueryUtils {
 
     }
 
+    /**
+     * base Url to query
+     */
     private static final String startUrl = "https://content.guardianapis.com/search";
 
     /**
      * parses json and returns list of 'Articles'
      * @param inputUrl: url of json response
+     * @return list of articles with query
      */
     public static List<Article> getArticles(String inputUrl) {
 
@@ -73,7 +77,7 @@ public final class QueryUtils {
     /**
      * converts String of url to 'URL' object
      * @param urlString: String of url
-     * @return URL object
+     * @return URL object of article link
      */
     private static URL createUrlObject(String urlString) {
         URL url;
@@ -116,7 +120,7 @@ public final class QueryUtils {
     /**
      * converts a map of {Article and associated String of image} to
      * list {of Articles} with the Bitmap image
-     * @return
+     * @return list of Articles with Image in Bitmap format
      */
 
     private static List<Article> mapImagesToBitmap(Map<Article,String> articleMap) {
@@ -125,7 +129,7 @@ public final class QueryUtils {
             Article article = entry.getKey();
             Bitmap bitmap = toBitmap(entry.getValue());
             if (bitmap == null) {
-                Log.v(article.getWebTitle(), "BITMAP IS NULL FOR THIS ARTICLE");
+                Log.v(article.getArticleTitle(), "BITMAP IS NULL FOR THIS ARTICLE");
             }
             article.setImage(bitmap);
             bitmapArticles.add(article);

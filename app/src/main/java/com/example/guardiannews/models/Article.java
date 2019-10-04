@@ -4,76 +4,73 @@ import android.graphics.Bitmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents a news article
+ */
 public class Article {
 
-    @JsonProperty("id")
-    private String id = "defaultid";
-
+    /**
+     * the media type, such as article, poll, video, etc
+     */
     @JsonProperty("type")
-    private String type;
+    private String articleType;
 
-    @JsonProperty("sectionId")
-    private String sectionId;
+    /**
+     * category of media, such as Education
+     */
+    @JsonProperty("sectionName")
+    private String sectionName;
 
     @JsonProperty("webTitle")
-    private String webTitle;
+    private String articleTitle;
+
+    @JsonProperty("webUrl")
+    private String webUrl;
 
     private Bitmap image;
-
-    @JsonProperty("pillarName")
-    private String pillarName = "defaultPillarName";
 
     public Article() {
 
     }
 
-    public Article(String id, String type, String sectionId, String webTitle, String pillarName) {
-        this.id = id;
-        this.type = type;
-        this.sectionId = sectionId;
-        this.webTitle = webTitle;
-        this.pillarName = pillarName;
-    }
-
-    public Article(String id, String type, String sectionId, String webTitle, Bitmap image, String pillarName) {
-        this.id = id;
-        this.type = type;
-        this.sectionId = sectionId;
-        this.webTitle = webTitle;
+    public Article(String articleType, String sectionName, String articleTitle, String webUrl, Bitmap image) {
+        this.articleType = articleType;
+        this.sectionName = sectionName;
+        this.articleTitle = articleTitle;
+        this.webUrl = webUrl;
         this.image = image;
-        this.pillarName = pillarName;
     }
 
-    public String getId() {
-        return id;
+    public String getArticleType() {
+        return articleType;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
     }
 
-    public String getType() {
-        return type;
+    public String getSectionName() {
+        return sectionName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 
-    public String getSectionId() {
-        return sectionId;
+    public String getArticleTitle() {
+        return articleTitle;
     }
 
-    public void setSectionId(String sectionId) {
-        this.sectionId = sectionId;
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
-    public String getWebTitle() {
-        return webTitle;
+    public String getWebUrl() {
+        return webUrl;
     }
 
-    public void setWebTitle(String webTitle) {
-        this.webTitle = webTitle;
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
     }
 
     public Bitmap getImage() {
@@ -84,23 +81,15 @@ public class Article {
         this.image = image;
     }
 
-    public String getPillarName() {
-        return pillarName;
-    }
-
-    public void setPillarName(String pillarName) {
-        this.pillarName = pillarName;
-    }
-
     @Override
     public String toString() {
         return "Article{" +
-                "id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", sectionId='" + sectionId + '\'' +
-                ", webTitle='" + webTitle + '\'' +
+                "articleType='" + articleType + '\'' +
+                ", sectionName='" + sectionName + '\'' +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", webUrl='" + webUrl + '\'' +
                 ", image=" + image +
-                ", pillarName='" + pillarName + '\'' +
                 '}';
     }
+
 }
