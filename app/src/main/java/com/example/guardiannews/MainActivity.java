@@ -1,8 +1,10 @@
 package com.example.guardiannews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -22,7 +24,7 @@ import com.example.guardiannews.models.Article;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener {
 
     /** Guardian API Key **/
     private final String GUARDIAN_NEWS_URL = "?api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     /** displays message if connection works **/
     private TextView connectionTextView;
+
+    private ArrayList<Article> mArticles = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
 
@@ -48,12 +52,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             initRecylerView();
             getSupportLoaderManager().initLoader(1, null, this).forceLoad();
         }
-
         else {
-            connectionTextView = (TextView) findViewById(R.id.connectionCheck);
+            connectionTextView = findViewById(R.id.connectionCheck);
             connectionTextView.setText(R.string.no_connection);
         }
-
         setSupportActionBar((Toolbar) findViewById(R.id.articles_toolbar));
         setTitle("Guardian News");
     }
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyTextView = findViewById(R.id.articles_found);
             emptyTextView.setText(R.string.no_articles_found);
         }
-
     }
 
     /**
@@ -101,8 +102,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void initRecylerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        articleRecyclerAdapter = new ArticleRecyclerAdapter(new ArrayList<Article>());
+        articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this);
         mRecyclerView.setAdapter(articleRecyclerAdapter);
+    }
+
+
+    @Override
+    public void onArticleClick(int position, Article article) {
+        Log.d("NOTE CLICK:", article.getWebUrl());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getWebUrl()));
+        startActivity(browserIntent);
     }
 
 }

@@ -20,20 +20,22 @@ import java.util.List;
 public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.ArticleViewHolder> {
 
     private List<Article> mArticles;
+    private OnArticleListener onArticleListener;
 
     /**
      * Constructor
      * @param articles: list of Articles (data source)
      */
-    public ArticleRecyclerAdapter(ArrayList<Article> articles) {
+    public ArticleRecyclerAdapter(ArrayList<Article> articles, OnArticleListener onArticleListener) {
         this.mArticles = articles;
+        this.onArticleListener = onArticleListener;
     }
 
     @NonNull
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item, viewGroup, false);
-        return new ArticleViewHolder(view);
+        return new ArticleViewHolder(view, onArticleListener);
     }
 
     @Override
@@ -58,19 +60,30 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         mArticles = newArticles;
     }
 
-    public class ArticleViewHolder extends RecyclerView.ViewHolder {
+    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView thumbnail;
         TextView title, type, section;
+        OnArticleListener onArticleListener;
 
-        public ArticleViewHolder(@NonNull View itemView) {
+        public ArticleViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.article_thumbnail);
             title = itemView.findViewById(R.id.article_title);
             type = itemView.findViewById(R.id.article_type);
             section = itemView.findViewById(R.id.article_section);
-
+            this.onArticleListener = onArticleListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onArticleListener.onArticleClick(getAdapterPosition(), mArticles.get(getAdapterPosition()));
+        }
+    }
+
+    public interface OnArticleListener {
+        void onArticleClick(int position, Article article);
     }
 
 }
