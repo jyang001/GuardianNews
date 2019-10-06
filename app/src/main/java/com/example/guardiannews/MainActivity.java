@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.guardiannews.adapters.ArticleRecyclerAdapter;
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /** Guardian API Key **/
     private final String GUARDIAN_NEWS_URL = "?api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
 
-    private ArticleRecyclerAdapter articleRecyclerAdapter;
-
     /** displays message if article list is empty **/
     private TextView emptyTextView;
 
@@ -40,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ArrayList<Article> mArticles = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
+
+    private ArticleRecyclerAdapter articleRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         setSupportActionBar((Toolbar) findViewById(R.id.articles_toolbar));
         setTitle("Guardian News");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     @NonNull
