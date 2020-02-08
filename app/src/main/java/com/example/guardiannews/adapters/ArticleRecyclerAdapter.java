@@ -52,7 +52,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         else {
             articleViewHolder.mediaType.setImageResource(R.drawable.ic_videocam);
         }
-        articleViewHolder.section.setText(currentArticle.getSectionName());
+        articleViewHolder.pillarName.setText(currentArticle.getPillarName());
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView thumbnail;
-        TextView title, section;
+        TextView title, pillarName;
         ImageView mediaType;
         OnArticleListener onArticleListener;
 
@@ -80,7 +80,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
             thumbnail = itemView.findViewById(R.id.article_thumbnail);
             title = itemView.findViewById(R.id.article_title);
             mediaType = itemView.findViewById(R.id.article_type);
-            section = itemView.findViewById(R.id.article_section);
+            pillarName = itemView.findViewById(R.id.article_pillar);
             this.onArticleListener = onArticleListener;
             itemView.setOnClickListener(this);
         }

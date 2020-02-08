@@ -105,13 +105,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * instantiates a new recyclerView linked with the adapter
+     */
     private void initRecylerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this);
         mRecyclerView.setAdapter(articleRecyclerAdapter);
     }
-
 
     @Override
     public void onArticleClick(int position, Article article) {
