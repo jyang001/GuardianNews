@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/imperialBlue"
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -36,7 +37,7 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="1dp"
         android:layout_marginStart="1dp"
-        android:padding="5dp"
+        android:padding="2dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:divider="#ffffff"
         android:orientation="vertical"/>
