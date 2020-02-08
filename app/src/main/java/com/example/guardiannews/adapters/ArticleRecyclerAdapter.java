@@ -2,6 +2,7 @@ package com.example.guardiannews.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,14 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         Article currentArticle = mArticles.get(i);
         articleViewHolder.thumbnail.setImageBitmap(currentArticle.getImage());
         articleViewHolder.title.setText(currentArticle.getArticleTitle());
-        articleViewHolder.type.setText(currentArticle.getArticleType());
+
+        Log.d("article type is this", currentArticle.getArticleType());
+
+        if ("article".equals(currentArticle.getArticleType()))
+            articleViewHolder.mediaType.setImageResource(R.drawable.ic_web_black);
+        else {
+            articleViewHolder.mediaType.setImageResource(R.drawable.ic_videocam);
+        }
         articleViewHolder.section.setText(currentArticle.getSectionName());
     }
 
@@ -63,14 +71,15 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView thumbnail;
-        TextView title, type, section;
+        TextView title, section;
+        ImageView mediaType;
         OnArticleListener onArticleListener;
 
         public ArticleViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.article_thumbnail);
             title = itemView.findViewById(R.id.article_title);
-            type = itemView.findViewById(R.id.article_type);
+            mediaType = itemView.findViewById(R.id.article_type);
             section = itemView.findViewById(R.id.article_section);
             this.onArticleListener = onArticleListener;
             itemView.setOnClickListener(this);

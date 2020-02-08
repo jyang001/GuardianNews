@@ -96,8 +96,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /**
-     * boolean method to determine if device is connected
-     * to the internet
+     * boolean method to determine if device is connected to the internet
      */
     public boolean checkConnection(Context context) {
         ConnectivityManager connectivityManager
