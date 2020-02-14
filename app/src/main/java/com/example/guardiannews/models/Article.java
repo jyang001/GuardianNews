@@ -16,7 +16,7 @@ public class Article {
     private String articleType;
 
     /**
-     * category of media, such as Education
+     * category of media one of: News, Opinion, Sport, Culture, Lifestyle, Arts
      */
     @JsonProperty("pillarName")
     private String pillarName;
