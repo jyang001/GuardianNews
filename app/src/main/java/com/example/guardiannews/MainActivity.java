@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.guardiannews.adapters.ArticleRecyclerAdapter;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private ArticleRecyclerAdapter articleRecyclerAdapter;
 
+    private Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,7 +54,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if(checkConnection(this) == true) {
             mRecyclerView = findViewById(R.id.recyclerView);
             initRecylerView();
-            getSupportLoaderManager().initLoader(1, null, this).forceLoad();
+            Bundle bundle = new Bundle();
+            bundle.putString("uri", GUARDIAN_NEWS_URL);
+            LoaderManager.getInstance(this).initLoader(1, bundle, this).forceLoad();
         }
         else {
             connectionTextView = findViewById(R.id.connectionCheck);
@@ -61,17 +66,41 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setTitle("Guardian News");
     }
 
+    /**
+     * creates the toolbar menu
+     * @param menu: menu object
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.newsOption:
+                Bundle args = new Bundle();
+                loadNewQuery("/tags?section=news" + GUARDIAN_NEWS_URL);
+                return true;
+            default:
+                return true;
+        }
+    }
+
+    private void loadNewQuery(String query) {
+        Bundle args = new Bundle();
+        args.putString("uri", query);
+        LoaderManager.getInstance(this).restartLoader(1,args,this);
+    }
+
+
     @NonNull
     @Override
     public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle bundle) {
         Log.d("check LOADER: ","LOADER CREATED" );
-        return new ArticleLoader(this, GUARDIAN_NEWS_URL);
+        return new ArticleLoader(this, bundle);
     }
 
     @Override

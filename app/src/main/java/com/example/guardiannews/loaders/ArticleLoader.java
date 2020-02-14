@@ -1,6 +1,7 @@
 package com.example.guardiannews.loaders;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
@@ -18,17 +19,17 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
     /** Tag for log messages */
     private static final String LOG_TAG = ArticleLoader.class.getName();
 
-    /** Query URL */
-    private String mUrl;
+    /** Bundle for tags **/
+    private Bundle bundle;
 
     /**
      *
      * @param context
-     * @param url: url to retrieve data from
+     * @param bundle: achieve url params
      */
-    public ArticleLoader(Context context, String url) {
+    public ArticleLoader(Context context, Bundle bundle) {
         super(context);
-        mUrl=url;
+        this.bundle = bundle;
     }
 
     @Override
@@ -40,10 +41,10 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
     @Override
     public List<Article> loadInBackground() {
         Log.i(LOG_TAG, "TEST: loadInBackground called");
-        if(mUrl == null) {
+        if(bundle == null) {
             return null;
         }
-        List<Article> articles = QueryUtils.getArticles(mUrl);
+        List<Article> articles = QueryUtils.getArticles(bundle.getString("uri"));
         return articles;
     }
 
