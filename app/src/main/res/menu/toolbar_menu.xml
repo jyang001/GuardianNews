@@ -10,11 +10,30 @@
         android:title="@string/search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
+    
+    <!-- article category menu options -->
+    <item
+        android:id="@+id/newsOption"
+        android:title="@string/cmenu_option_1" />
 
     <item
-        android:id="@+id/menu_preferences"
-        android:orderInCategory="100"
-        android:title="@string/category"
-        app:showAsAction="never" />
+        android:id="@+id/opinionOption"
+        android:title="@string/cmenu_option_2" />
+
+    <item
+        android:id="@+id/sportOption"
+        android:title="@string/cmenu_option_3" />
+
+    <item
+        android:id="@+id/cultureOption"
+        android:title="@string/cmenu_option_4" />
+
+    <item
+        android:id="@+id/lifestyleOption"
+        android:title="@string/cmenu_option_5" />
+
+    <item
+        android:id="@+id/artsOption"
+        android:title="@string/cmenu_option_6" />
 
 </menu>

@@ -4,4 +4,13 @@
     <string name="no_articles_found">No Articles Found</string>
     <string name="category">Category</string>
     <string name="search">Search</string>
+
+    <!-- Strings for Context Menu -->
+    <string name="cmenu_option_1">News</string>
+    <string name="cmenu_option_2">Opinion</string>
+    <string name="cmenu_option_3">Sport</string>
+    <string name="cmenu_option_4">Culture</string>
+    <string name="cmenu_option_5">LifeStyle</string>
+    <string name="cmenu_option_6">Arts</string>
+
 </resources>
