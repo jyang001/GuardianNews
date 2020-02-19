@@ -10,7 +10,7 @@
         android:title="@string/search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
-    
+
     <!-- article category menu options -->
     <item
         android:id="@+id/newsOption"

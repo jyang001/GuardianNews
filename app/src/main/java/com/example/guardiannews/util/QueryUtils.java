@@ -31,7 +31,7 @@ public final class QueryUtils {
     /**
      * base Url to query
      */
-    private static final String startUrl = "https://content.guardianapis.com/search";
+    private static final String startUrl = "https://content.guardianapis.com/search?";
 
     /**
      * parses json and returns list of 'Articles'
@@ -40,11 +40,12 @@ public final class QueryUtils {
      */
     public static List<Article> getArticles(String inputUrl) {
 
+        Log.d("URL PARSED:", inputUrl);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
-        //used to associate Article with 'thumbnail' string to convert the string to a bitmap before setting Article field
+        //used to associate Article with 'thumbnail' string to convert the string to a Bitmap before setting Article field
         Map<Article,String> imageAssocation = new HashMap<>();
 
         try {

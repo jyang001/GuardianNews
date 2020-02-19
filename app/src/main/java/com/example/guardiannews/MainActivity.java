@@ -29,7 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener {
 
     /** Guardian API Key **/
-    private final String GUARDIAN_NEWS_URL = "?api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
+    private final String GUARDIAN_NEWS_URL = "&api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
 
     /** displays message if article list is empty **/
     private TextView emptyTextView;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(checkConnection(this) == true) {
+        if(checkConnection(this)) {
             mRecyclerView = findViewById(R.id.recyclerView);
             initRecylerView();
             Bundle bundle = new Bundle();
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /**
      * creates the toolbar menu
      * @param menu: menu object
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         switch (item.getItemId()) {
             case R.id.newsOption:
                 Bundle args = new Bundle();
-                loadNewQuery("/tags?section=news" + GUARDIAN_NEWS_URL);
+                loadNewQuery("section=news" + GUARDIAN_NEWS_URL);
                 return true;
             default:
                 return true;
@@ -92,15 +91,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void loadNewQuery(String query) {
         Bundle args = new Bundle();
         args.putString("uri", query);
-        LoaderManager.getInstance(this).restartLoader(1,args,this);
+        LoaderManager.getInstance(this).restartLoader(1,args,this).forceLoad();
+        mRecyclerView.smoothScrollToPosition(0);
+        Log.d("URL:", "LOAD NEW QUERY EXECUTED");
     }
 
 
     @NonNull
     @Override
-    public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle bundle) {
+    public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle args) {
         Log.d("check LOADER: ","LOADER CREATED" );
-        return new ArticleLoader(this, bundle);
+        return new ArticleLoader(this, args);
     }
 
     @Override
