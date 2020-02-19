@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -31,12 +30,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /** Guardian API Key **/
     private final String GUARDIAN_NEWS_URL = "&api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
 
-    /** displays message if article list is empty **/
-    private TextView emptyTextView;
-
-    /** displays message if connection works **/
-    private TextView connectionTextView;
-
     private ArrayList<Article> mArticles = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
@@ -47,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        /* displays message if connection works */
+        TextView connectionTextView;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -93,19 +89,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         args.putString("uri", query);
         LoaderManager.getInstance(this).restartLoader(1,args,this).forceLoad();
         mRecyclerView.smoothScrollToPosition(0);
-        Log.d("URL:", "LOAD NEW QUERY EXECUTED");
     }
 
 
     @NonNull
     @Override
     public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle args) {
-        Log.d("check LOADER: ","LOADER CREATED" );
         return new ArticleLoader(this, args);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Article>> loader, List<Article> articles) {
+
+        /* displays message if article list is empty **/
+        TextView emptyTextView;
+
         if(articles != null && !articles.isEmpty()) {
             articleRecyclerAdapter.refreshLayout(articles);
             articleRecyclerAdapter.notifyDataSetChanged();
@@ -147,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onArticleClick(int position, Article article) {
-        Log.d("NOTE CLICK:", article.getWebUrl());
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getWebUrl()));
         startActivity(browserIntent);
     }
