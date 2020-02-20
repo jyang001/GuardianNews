@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 return true;
             case R.id.cultureOption:
                 loadNewQuery("section=culture" + GUARDIAN_NEWS_URL);
+                return true;
             case R.id.technologyOption:
                 loadNewQuery("section=technology" + GUARDIAN_NEWS_URL);
                 return true;
