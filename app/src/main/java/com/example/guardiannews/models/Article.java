@@ -16,10 +16,10 @@ public class Article {
     private String articleType;
 
     /**
-     * category of media one of: News, Opinion, Sport, Culture, Lifestyle, Arts
+     * category of media
      */
-    @JsonProperty("pillarName")
-    private String pillarName;
+    @JsonProperty("sectionName")
+    private String sectionName;
 
     @JsonProperty("webTitle")
     private String articleTitle;
@@ -33,9 +33,9 @@ public class Article {
 
     }
 
-    public Article(String articleType, String pillarName, String articleTitle, String webUrl, Bitmap image) {
+    public Article(String articleType, String sectionName, String articleTitle, String webUrl, Bitmap image) {
         this.articleType = articleType;
-        this.pillarName = pillarName;
+        this.sectionName = sectionName;
         this.articleTitle = articleTitle;
         this.webUrl = webUrl;
         this.image = image;
@@ -49,10 +49,12 @@ public class Article {
         this.articleType = articleType;
     }
 
-    public String getPillarName() { return pillarName; }
+    public String getSectionName() {
+        return sectionName;
+    }
 
-    public void setPillarName(String sectionName) {
-        this.pillarName = sectionName;
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 
     public String getArticleTitle() {
@@ -83,7 +85,7 @@ public class Article {
     public String toString() {
         return "Article{" +
                 "articleType='" + articleType + '\'' +
-                ", sectionName='" + pillarName + '\'' +
+                ", sectionName='" + sectionName + '\'' +
                 ", articleTitle='" + articleTitle + '\'' +
                 ", webUrl='" + webUrl + '\'' +
                 ", image=" + image +
