@@ -76,8 +76,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.newsOption:
-                Bundle args = new Bundle();
                 loadNewQuery("section=news" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.worldOption:
+                loadNewQuery("section=world" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.sportOption:
+                loadNewQuery("section=sport" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.cultureOption:
+                loadNewQuery("section=culture" + GUARDIAN_NEWS_URL);
+            case R.id.technologyOption:
+                loadNewQuery("section=technology" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.fashionOption:
+                loadNewQuery("section=fashion" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.scienceOption:
+                loadNewQuery("section=science" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.travelOption:
+                loadNewQuery("section=travel" + GUARDIAN_NEWS_URL);
+                return true;
+            case R.id.businessOption:
+                loadNewQuery("section=business" + GUARDIAN_NEWS_URL);
                 return true;
             default:
                 return true;
