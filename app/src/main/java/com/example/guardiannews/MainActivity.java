@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,6 +49,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.articles_toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("Guardian News");
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         if(checkConnection(this)) {
             mRecyclerView = findViewById(R.id.recyclerView);
             initRecylerView();
@@ -58,8 +70,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             connectionTextView = findViewById(R.id.connectionCheck);
             connectionTextView.setText(R.string.no_connection);
         }
-        setSupportActionBar((Toolbar) findViewById(R.id.articles_toolbar));
-        setTitle("Guardian News");
     }
 
     /**
@@ -72,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-    @Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.newsOption:
@@ -105,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             default:
                 return true;
         }
-    }
+    }*/
 
     private void loadNewQuery(String query) {
         Bundle args = new Bundle();
