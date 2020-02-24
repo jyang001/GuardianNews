@@ -2,12 +2,12 @@
     <string name="app_name">Guardian News</string>
     <string name="no_connection">No Internet Connection</string>
     <string name="no_articles_found">No Articles Found</string>
-    <string name="category">Category</string>
     <string name="search">Search</string>
 
     <!-- Strings for Context Menu -->
+    <string name="category">Category</string>
     <string name="cmenu_option_1">News</string>
-    <string name="cmenu_option_2">World</string>
+    <string name="cmenu_option_2">World News</string>
     <string name="cmenu_option_3">Sport</string>
     <string name="cmenu_option_4">Culture</string>
     <string name="cmenu_option_5">Technology</string>
@@ -15,5 +15,11 @@
     <string name="cmenu_option_7">Science</string>
     <string name="cmenu_option_8">Travel</string>
     <string name="cmenu_option_9">Business</string>
+
+    <!-- Navigation -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

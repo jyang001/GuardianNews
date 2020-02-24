@@ -30,7 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener {
 
     /** Guardian API Key **/
-    private final String GUARDIAN_NEWS_URL = "&api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail";
+    private final String GUARDIAN_NEWS_URL = "/*add API key here*/";
 
     private ArrayList<Article> mArticles = new ArrayList<>();
 

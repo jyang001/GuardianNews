@@ -1,45 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/imperialBlue"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true"
+    android:id="@+id/drawer_layout">
 
-    <android.support.design.widget.AppBarLayout
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/articles_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"/>
+        android:layout_height="match_parent" />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <TextView
-        android:id="@+id/connectionCheck"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connection is Fine"/>
-
-    <TextView
-        android:id="@+id/articles_found"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Articles Found"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
-        android:layout_marginStart="1dp"
-        android:padding="2dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:divider="#ffffff"
-        android:orientation="vertical"/>
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>

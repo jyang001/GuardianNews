@@ -11,41 +11,11 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 
-    <!-- article category menu options -->
     <item
-        android:id="@+id/newsOption"
-        android:title="@string/cmenu_option_1" />
+        android:id="@+id/menu_preferences"
+        android:orderInCategory="100"
+        android:title="@string/category"
+        app:showAsAction="never" />
 
-    <item
-        android:id="@+id/worldOption"
-        android:title="@string/cmenu_option_2" />
-
-    <item
-        android:id="@+id/sportOption"
-        android:title="@string/cmenu_option_3" />
-
-    <item
-        android:id="@+id/cultureOption"
-        android:title="@string/cmenu_option_4" />
-
-    <item
-        android:id="@+id/technologyOption"
-        android:title="@string/cmenu_option_5" />
-
-    <item
-        android:id="@+id/fashionOption"
-        android:title="@string/cmenu_option_6" />
-
-    <item
-        android:id="@+id/scienceOption"
-        android:title="@string/cmenu_option_7" />
-
-    <item
-        android:id="@+id/travelOption"
-        android:title="@string/cmenu_option_8" />
-
-    <item
-        android:id="@+id/businessOption"
-        android:title="@string/cmenu_option_9" />
 
 </menu>

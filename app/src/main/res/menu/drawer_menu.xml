@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Categories">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/news_option"
+                    android:title="@string/cmenu_option_1" />
+                <item
+                    android:id="@+id/world_option"
+                    android:title="@string/cmenu_option_2" />
+                <item
+                    android:id="@+id/sports_option"
+                    android:title="@string/cmenu_option_3" />
+                <item
+                    android:id="@+id/culture_option"
+                    android:title="@string/cmenu_option_4" />
+                <item
+                    android:id="@+id/technology_option"
+                    android:title="@string/cmenu_option_5" />
+                <item
+                    android:id="@+id/fashion_option"
+                    android:title="@string/cmenu_option_6" />
+                <item
+                    android:id="@+id/science_option"
+                    android:title="@string/cmenu_option_7" />
+                <item
+                    android:id="@+id/travel_option"
+                    android:title="@string/cmenu_option_8" />
+                <item
+                    android:id="@+id/business_option"
+                    android:title="@string/cmenu_option_9" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
