@@ -30,10 +30,10 @@ import com.example.guardiannews.models.Article;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener, NavigationView.OnNavigationItemSelectedListener {
 
     /** Guardian API Key **/
-    private final String GUARDIAN_NEWS_URL = "//api key here";
+    private final String GUARDIAN_NEWS_URL = ""; //api key here
 
     private ArrayList<Article> mArticles = new ArrayList<>();
 
@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setTitle("Guardian News");
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -98,38 +101,55 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 /*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.newsOption:
+    }*/
+
+    /**
+     * method for DrawerLayout selection
+     * @param menuItem: selection that was pressed
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.news_option:
                 loadNewQuery("section=news" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.worldOption:
+            case R.id.world_option:
                 loadNewQuery("section=world" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.sportOption:
+            case R.id.sports_option:
                 loadNewQuery("section=sport" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.cultureOption:
+            case R.id.culture_option:
                 loadNewQuery("section=culture" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.technologyOption:
+            case R.id.technology_option:
                 loadNewQuery("section=technology" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.fashionOption:
+            case R.id.fashion_option:
                 loadNewQuery("section=fashion" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.scienceOption:
+            case R.id.science_option:
                 loadNewQuery("section=science" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.travelOption:
+            case R.id.travel_option:
                 loadNewQuery("section=travel" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.businessOption:
+            case R.id.business_option:
                 loadNewQuery("section=business" + GUARDIAN_NEWS_URL);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             default:
                 return true;
         }
-    }*/
+    }
 
     private void loadNewQuery(String query) {
         Bundle args = new Bundle();
