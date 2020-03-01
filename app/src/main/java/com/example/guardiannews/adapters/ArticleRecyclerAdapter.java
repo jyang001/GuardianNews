@@ -1,7 +1,10 @@
 package com.example.guardiannews.adapters;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,21 +24,43 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
 
     private List<Article> mArticles;
     private OnArticleListener onArticleListener;
+    private String colorTheme;
 
     /**
      * Constructor
      * @param articles: list of Articles (data source)
      */
-    public ArticleRecyclerAdapter(ArrayList<Article> articles, OnArticleListener onArticleListener) {
+    public ArticleRecyclerAdapter(ArrayList<Article> articles, OnArticleListener onArticleListener, String colorTheme) {
         this.mArticles = articles;
         this.onArticleListener = onArticleListener;
+        this.colorTheme = colorTheme;
+    }
+
+    public String getColorTheme() {
+        return colorTheme;
+    }
+
+    public void setColorTheme(String colorTheme) {
+        this.colorTheme = colorTheme;
     }
 
     @NonNull
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item, viewGroup, false);
-        return new ArticleViewHolder(view, onArticleListener);
+        Log.d("COLOR THEME IS:", colorTheme);
+        View view;
+        if(colorTheme == "Original Theme") {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item_main, viewGroup, false);
+            return new ArticleViewHolder(view, onArticleListener);
+        }
+        else if(colorTheme == "Standard Theme") {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item_standard, viewGroup, false);
+            return new ArticleViewHolder(view, onArticleListener);
+        }
+        else {
+            return null;
+        }
+
     }
 
     @Override
@@ -50,6 +75,8 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         else {
             articleViewHolder.mediaType.setImageResource(R.drawable.ic_videocam);
         }
+
+        giveTheme(articleViewHolder);
     }
 
     @Override
@@ -58,9 +85,19 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     }
 
     public void refreshLayout(List<Article> articles) {
-        ArrayList<Article> newArticles = new ArrayList<>();
-        newArticles.addAll(articles);
+        ArrayList<Article> newArticles = new ArrayList<>(articles);
         mArticles = newArticles;
+    }
+
+    private void giveTheme(ArticleViewHolder articleViewHolder) {
+        if(colorTheme == "Original Theme"){
+            //finish
+        }
+        else if(colorTheme == "Standard Theme") {
+            articleViewHolder.mCardView.setCardBackgroundColor(Color.WHITE);
+            articleViewHolder.title.setTextColor(Color.BLACK);
+            articleViewHolder.sectionName.setTextColor(Color.BLACK);
+        }
     }
 
     public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,9 +106,11 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         TextView title, sectionName;
         ImageView mediaType;
         OnArticleListener onArticleListener;
+        CardView mCardView;
 
         private ArticleViewHolder(@NonNull View itemView, OnArticleListener onArticleListener) {
             super(itemView);
+            mCardView = itemView.findViewById(R.id.article_card_view);
             thumbnail = itemView.findViewById(R.id.article_thumbnail);
             title = itemView.findViewById(R.id.article_title);
             mediaType = itemView.findViewById(R.id.article_type);
@@ -89,5 +128,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     public interface OnArticleListener {
         void onArticleClick(int position, Article article);
     }
+
 
 }

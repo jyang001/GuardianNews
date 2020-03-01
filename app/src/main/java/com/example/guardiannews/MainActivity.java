@@ -33,7 +33,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener, NavigationView.OnNavigationItemSelectedListener {
 
     /** Guardian API Key **/
-    private final String GUARDIAN_NEWS_URL = ""; //api key here
+    private final String GUARDIAN_NEWS_URL = "&api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail"; //api key here
 
     private ArrayList<Article> mArticles = new ArrayList<>();
 
@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private Bundle bundle;
 
     private DrawerLayout drawerLayout;
+
+    private String colorTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Toolbar toolbar = findViewById(R.id.articles_toolbar);
         setSupportActionBar(toolbar);
         setTitle("Guardian News");
+
+        colorTheme = "Original Theme";
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -99,9 +103,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    }*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.theme_1:
+                Log.d("THEME PRESSED:", "STANDARD THEME");
+                colorTheme = "Standard Theme";
+                articleRecyclerAdapter.setColorTheme(colorTheme);
+                articleRecyclerAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.theme_2:
+                colorTheme = "Original Theme";
+                articleRecyclerAdapter.setColorTheme(colorTheme);
+                articleRecyclerAdapter.notifyDataSetChanged();
+                return true;
+            default:
+                return false;
+        }
+    }
 
     /**
      * method for DrawerLayout selection
@@ -167,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Article>> loader, List<Article> articles) {
-
         /* displays message if article list is empty **/
         TextView emptyTextView;
 
@@ -206,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void initRecylerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this);
+        articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this, colorTheme);
         mRecyclerView.setAdapter(articleRecyclerAdapter);
     }
 

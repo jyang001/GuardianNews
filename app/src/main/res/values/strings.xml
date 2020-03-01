@@ -4,7 +4,11 @@
     <string name="no_articles_found">No Articles Found</string>
     <string name="search">Search</string>
 
-    <!-- Strings for Context Menu -->
+    <!-- String for Top Bar Menu -->
+    <string name="theme_1">Standard Theme</string>
+    <string name="theme_2">Original Theme</string>
+
+    <!-- Strings for Drawer Menu -->
     <string name="category">Category</string>
     <string name="cmenu_option_1">News</string>
     <string name="cmenu_option_2">World News</string>
