@@ -1,10 +1,11 @@
 package com.example.guardiannews.adapters;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +26,17 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     private List<Article> mArticles;
     private OnArticleListener onArticleListener;
     private String colorTheme;
+    private Context context;
 
     /**
      * Constructor
      * @param articles: list of Articles (data source)
      */
-    public ArticleRecyclerAdapter(ArrayList<Article> articles, OnArticleListener onArticleListener, String colorTheme) {
+    public ArticleRecyclerAdapter(ArrayList<Article> articles, OnArticleListener onArticleListener, String colorTheme, Context context) {
         this.mArticles = articles;
         this.onArticleListener = onArticleListener;
         this.colorTheme = colorTheme;
-    }
-
-    public String getColorTheme() {
-        return colorTheme;
+        this.context = context;
     }
 
     public void setColorTheme(String colorTheme) {
@@ -47,20 +46,9 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     @NonNull
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d("COLOR THEME IS:", colorTheme);
         View view;
-        if(colorTheme == "Original Theme") {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item_main, viewGroup, false);
-            return new ArticleViewHolder(view, onArticleListener);
-        }
-        else if(colorTheme == "Standard Theme") {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item_standard, viewGroup, false);
-            return new ArticleViewHolder(view, onArticleListener);
-        }
-        else {
-            return null;
-        }
-
+        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.article_item_main, viewGroup, false);
+        return new ArticleViewHolder(view, onArticleListener);
     }
 
     @Override
@@ -75,7 +63,6 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         else {
             articleViewHolder.mediaType.setImageResource(R.drawable.ic_videocam);
         }
-
         giveTheme(articleViewHolder);
     }
 
@@ -85,13 +72,15 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
     }
 
     public void refreshLayout(List<Article> articles) {
-        ArrayList<Article> newArticles = new ArrayList<>(articles);
-        mArticles = newArticles;
+        mArticles = articles;
     }
 
     private void giveTheme(ArticleViewHolder articleViewHolder) {
         if(colorTheme == "Original Theme"){
             //finish
+            articleViewHolder.mCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.emeraldGreen));
+            articleViewHolder.title.setTextColor(Color.WHITE);
+            articleViewHolder.sectionName.setTextColor(Color.WHITE);
         }
         else if(colorTheme == "Standard Theme") {
             articleViewHolder.mCardView.setCardBackgroundColor(Color.WHITE);

@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleRecyclerAdapter.OnArticleListener, NavigationView.OnNavigationItemSelectedListener {
 
     /** Guardian API Key **/
-    private final String GUARDIAN_NEWS_URL = "&api-key=c7771d54-6420-45bf-b2c9-75182b3f2479&show-fields=thumbnail"; //api key here
+    private final String GUARDIAN_NEWS_URL = ""; //api key here inside " "
 
     private ArrayList<Article> mArticles = new ArrayList<>();
 
@@ -107,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
             case R.id.theme_1:
-                Log.d("THEME PRESSED:", "STANDARD THEME");
                 colorTheme = "Standard Theme";
                 articleRecyclerAdapter.setColorTheme(colorTheme);
                 articleRecyclerAdapter.notifyDataSetChanged();
@@ -177,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecyclerView.smoothScrollToPosition(0);
     }
 
-
     @NonNull
     @Override
     public Loader<List<Article>> onCreateLoader(int i, @Nullable Bundle args) {
@@ -224,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void initRecylerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this, colorTheme);
+        articleRecyclerAdapter = new ArticleRecyclerAdapter(mArticles, this, colorTheme, this.getApplicationContext());
         mRecyclerView.setAdapter(articleRecyclerAdapter);
     }
 
