@@ -1,5 +1,5 @@
 # GuardianNews
-An Android Application to view the latest News from Guardian News
+GuardianNews is an Android Application which allows users to view various newspaper articles from the popular British daily newspaper company 'The Guardian'. It makes various calls to the official 'The Guardian' API parses the retrieved JSON responses to deliver the various newspaper articles.
 
 ## Prerequisites
 * Android Studio
