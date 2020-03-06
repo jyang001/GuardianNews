@@ -13,11 +13,16 @@ $ git clone https://github.com/jyang001/GuardianNews.git
 * Or you can download the zip file
 
 ## Demo
-![GuardianDemo1](https://user-images.githubusercontent.com/31452709/75103536-ca5b7400-55c9-11ea-98e5-70f8db4ebe4e.jpg)
+![1](https://user-images.githubusercontent.com/31452709/76037545-59935080-5f15-11ea-96a0-441d7e11b0df.jpg)
+![2](https://user-images.githubusercontent.com/31452709/76037578-67e16c80-5f15-11ea-8161-1a0ab07e0655.jpg)
 
-![GuardianDemo2](https://user-images.githubusercontent.com/31452709/75103540-d6dfcc80-55c9-11ea-8189-c67106999bb2.jpg)
+![3](https://user-images.githubusercontent.com/31452709/76037606-7af43c80-5f15-11ea-9a8d-608c54dd799c.jpg)
+![4](https://user-images.githubusercontent.com/31452709/76037645-98c1a180-5f15-11ea-9d41-4490dbfd24f9.jpg)
 
-![GuardianDemo3](https://user-images.githubusercontent.com/31452709/75103543-dba48080-55c9-11ea-9d28-6fcbebefc292.jpg)
+![88](https://user-images.githubusercontent.com/31452709/76037790-e9d19580-5f15-11ea-9adf-b31d3f738860.jpg)
+![5](https://user-images.githubusercontent.com/31452709/76037660-a24b0980-5f15-11ea-8d87-ddd223aa0f02.jpg)
+
+
 
 
 
