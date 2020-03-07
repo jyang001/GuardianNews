@@ -23,7 +23,6 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
     private Bundle bundle;
 
     /**
-     *
      * @param context
      * @param bundle: achieve url params
      */

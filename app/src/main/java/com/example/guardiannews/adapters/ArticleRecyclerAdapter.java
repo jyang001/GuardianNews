@@ -63,6 +63,7 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         else {
             articleViewHolder.mediaType.setImageResource(R.drawable.ic_videocam);
         }
+
         giveTheme(articleViewHolder);
     }
 
@@ -75,9 +76,12 @@ public class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecycler
         mArticles = articles;
     }
 
+    /**
+     * helper method to set theme of each article
+     * @param articleViewHolder: current ViewHolder we want to modify
+     */
     private void giveTheme(ArticleViewHolder articleViewHolder) {
         if(colorTheme == "Original Theme"){
-            //finish
             articleViewHolder.mCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.emeraldGreen));
             articleViewHolder.title.setTextColor(Color.WHITE);
             articleViewHolder.sectionName.setTextColor(Color.WHITE);

@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
+    /**
+     * method for Context Menu
+     * @param menuItem: selection that was pressed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
@@ -168,6 +172,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    /**
+     * helper method to load articles with a custom query
+     * @param query: query we want to add to api to parse
+     */
     private void loadNewQuery(String query) {
         Bundle args = new Bundle();
         args.putString("uri", query);
